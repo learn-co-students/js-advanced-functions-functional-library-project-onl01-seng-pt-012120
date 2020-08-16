@@ -174,7 +174,79 @@ describe('index.js', function () {
     })
   })
 
-  
+  describe('sortBy', function () {
+    const unsortedIntArr = [3, 8, 5, 1, 9, 11, 8]
+    const unsortedStringArr = ["maru", "choux", "doge", "coconut"]
+    const unsortedObjArr = [
+      {name: "dennis", age: 29},
+      {name: "dee", age: 40},
+      {name: "mac", age: 34},
+      {name: "charlie", age: 32},
+      {name: "frank", age: 72}
+    ]
+    const controlSortedObjArr = [
+      {name: "dennis", age: 29},
+      {name: "charlie", age: 32},
+      {name: "mac", age: 34},
+      {name: "dee", age: 40},
+      {name: "frank", age: 72}
+    ]
+
+    function sortArrFunction(val) { return val }
+    function sortIntsBySin(val)   { return Math.sin(val) }
+    function sortObjFunction(obj) { return obj.age }
+
+    it('correctly sorts arrays of integers and arrays of strings', function () {
+      expect(arraysEqual(fi.sortBy(unsortedIntArr, sortArrFunction), [1, 3, 5, 8, 8, 9, 11])).to.equal(true)
+      expect(arraysEqual(fi.sortBy(unsortedStringArr, sortArrFunction), ["choux", "coconut", "doge", "maru"])).to.equal(true)
+    })
+
+    it('does not modify the original arrays', function () {
+      fi.sortBy(unsortedIntArr, sortArrFunction)
+      fi.sortBy(unsortedStringArr, sortArrFunction)
+      expect(arraysEqual(unsortedIntArr, [3, 8, 5, 1, 9, 11, 8])).to.equal(true)
+      expect(arraysEqual(unsortedStringArr, ["maru", "choux", "doge", "coconut"])).to.equal(true)
+    })
+
+    it('correctly sorts arrays of integers with non-standard sort', function () {
+      expect(arraysEqual(fi.sortBy([1, 2, 3, 4, 5, 6], sortIntsBySin), [5, 4, 6, 3, 1, 2])).to.equal(true)
+    })
+
+  })
+
+  describe('flatten', function () {
+
+    it('correctly flattens a ludicrously nested array', function () {
+      const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
+      const flatArr = fi.flatten(nestedArr)
+      expect(arraysEqual(flatArr, [1, 2, 3, 4, 5, 6, 7, 8, 9])).to.equal(true)
+    })
+
+    it('correctly flattens a single level when a second argument of "true" is passed', function () {
+      const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
+      const flatArr = fi.flatten(nestedArr, true)
+      expect(arraysEqual(flatArr, [1, 2, 3, [4, 5], 6, [7, [8, 9]]])).to.equal(true)
+    })
+
+  })
+
+  describe('uniq', function () {
+    const objA = {a: 1, b: 2}
+    const objB = objA
+    const objC = {c: 3, d: 4}
+
+    it('removes duplicate values from an array', function () {
+      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
+      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC])).to.equal(true)
+    })
+
+    it('removes duplicate values from an array when an iteratee is applied', function () {
+      const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, (val => val % 3))
+      console.log(newArr)
+      expect(arraysEqual(newArr, [1, 2, 3])).to.equal(true)
+    })
+
+  })
 
   describe('keys', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
