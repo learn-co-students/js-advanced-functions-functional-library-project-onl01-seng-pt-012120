@@ -62,60 +62,24 @@ const fi = (function() {
       return a2return;
     },
     size: function(c){
-      let count = 0
       if (Array.isArray(c)) {
+        let count = 0
         for (const i of c) {
           count+=1
         } 
         return count
       }else {
-        let aofk = []
         for (const [key, value] of Object.entries(c)) {
-          aofk.push(key)
-        };
-        for (const k of aofk) {
           count+=1
-        }
+        };
         return count
       }
     },
-    first: function(c,n){
-      if (n) {
-        return c.slice(0,n)
-      } else {
-        return c[0]
-      }
-    },
-    last: function(c,n){
-      let clm1 = c.length - 1
-      if(n){
-        return c.slice((c.length - n), c.length)
-      } else {
-        return c[clm1]
-      }
-    },
-    compact: function(c){
-      let fv = []
-      for (const i of c) {
-        if(!!i){
-           fv.push(i)
-        }
-      }
-      return fv
-    },
-    sortBy: function(c,cb){
-      let newCol = []
-      for (const i of c) {
-        newCol.push(i)
-      }
-      console.log(newCol.sort(cb()))
-      
-    },
-    flatten: function(c,[]){
-      for (const i of c) {
-        if()
-      }
-    },
+    first: function(){},
+    last: function(){},
+    compact: function(){},
+    sortBy: function(){},
+    flatten: function(){},
     uniq: function(){},
     keys: function(){},
     values: function(){},

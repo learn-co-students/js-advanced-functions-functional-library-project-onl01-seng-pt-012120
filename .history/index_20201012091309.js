@@ -80,42 +80,17 @@ const fi = (function() {
       }
     },
     first: function(c,n){
+      // if(Array.isArray(c))
       if (n) {
         return c.slice(0,n)
       } else {
         return c[0]
       }
     },
-    last: function(c,n){
-      let clm1 = c.length - 1
-      if(n){
-        return c.slice((c.length - n), c.length)
-      } else {
-        return c[clm1]
-      }
-    },
-    compact: function(c){
-      let fv = []
-      for (const i of c) {
-        if(!!i){
-           fv.push(i)
-        }
-      }
-      return fv
-    },
-    sortBy: function(c,cb){
-      let newCol = []
-      for (const i of c) {
-        newCol.push(i)
-      }
-      console.log(newCol.sort(cb()))
-      
-    },
-    flatten: function(c,[]){
-      for (const i of c) {
-        if()
-      }
-    },
+    last: function(){},
+    compact: function(){},
+    sortBy: function(){},
+    flatten: function(){},
     uniq: function(){},
     keys: function(){},
     values: function(){},

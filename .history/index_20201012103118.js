@@ -108,14 +108,10 @@ const fi = (function() {
       for (const i of c) {
         newCol.push(i)
       }
-      console.log(newCol.sort(cb()))
+      newCol.sort(cb())
       
     },
-    flatten: function(c,[]){
-      for (const i of c) {
-        if()
-      }
-    },
+    flatten: function(){},
     uniq: function(){},
     keys: function(){},
     values: function(){},

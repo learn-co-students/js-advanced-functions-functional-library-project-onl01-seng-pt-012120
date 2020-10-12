@@ -94,28 +94,9 @@ const fi = (function() {
         return c[clm1]
       }
     },
-    compact: function(c){
-      let fv = []
-      for (const i of c) {
-        if(!!i){
-           fv.push(i)
-        }
-      }
-      return fv
-    },
-    sortBy: function(c,cb){
-      let newCol = []
-      for (const i of c) {
-        newCol.push(i)
-      }
-      console.log(newCol.sort(cb()))
-      
-    },
-    flatten: function(c,[]){
-      for (const i of c) {
-        if()
-      }
-    },
+    compact: function(){},
+    sortBy: function(){},
+    flatten: function(){},
     uniq: function(){},
     keys: function(){},
     values: function(){},

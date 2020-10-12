@@ -104,18 +104,12 @@ const fi = (function() {
       return fv
     },
     sortBy: function(c,cb){
-      let newCol = []
-      for (const i of c) {
-        newCol.push(i)
-      }
-      console.log(newCol.sort(cb()))
-      
+      if(!cb){
+        let ans = c.sort()
+        return ans
+      } 
     },
-    flatten: function(c,[]){
-      for (const i of c) {
-        if()
-      }
-    },
+    flatten: function(){},
     uniq: function(){},
     keys: function(){},
     values: function(){},
