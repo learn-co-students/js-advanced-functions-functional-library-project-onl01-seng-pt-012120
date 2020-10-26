@@ -4,17 +4,17 @@ const fi = (function() {
       return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'
     },
 
-    each: function (c, callback) {
-      if (Array.isArray(c)) {
-        for (let i = 0; i < c.length; i++) {
-          callback(c[i])
+    each: function (collection, callback) {
+      if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+          callback(collection[i])
         };
       } else {
-        for (const [key, value] of Object.entries(c)) {
+        for (const [key, value] of Object.entries(collection)) {
           callback(value);
         };
       }
-      return c;
+      return collection;
 
     },
 
@@ -104,85 +104,20 @@ const fi = (function() {
       return fv
     },
     sortBy: function(c,cb){
-      let newCol = [...c]
-      return newCol.sort(function(a,b){return cb(a)-cb(b)})
+      let m  = c
+      m.sort(cb())
+      console.log(c)
+      console.log(m)
     },
-    unpack: function(receiver, arr) {
-      for (let val of arr)
-        receiver.push(val)
-    },
+    flatten: function(){},
+    uniq: function(){},
+    keys: function(){},
+    values: function(){},
 
-    flatten: function(c, hal, newArr = []) { 
-      if (!Array.isArray(c)) return newArr.push(c) 
-      if (hal) { 
-        for (let val of c) {
-          Array.isArray(val) ? this.unpack(newArr, val) : newArr.push(val)
-        }
-      } else {
-        for (let val of c) {
-          this.flatten(val, false, newArr)
-        }
-      }
-      return newArr
-      
-    },
-        uniqSorted: function(c, i) {
-      const sorted = [c[0]]
-      for (let index = 1; index < c.length; index++) {
-        if (sorted[index-1] !== c[index])
-          sorted.push(c[index])
-      }
-      return sorted
-    },
-
-    uniq: function(c, sorted=false, i=false) {
-      if (sorted) {
-        return fi.uniqSorted(c, i)
-      } else if (!i) {
-        return Array.from(new Set(c))
-      } else {
-        const modifiedVals = new Set()
-        const uniqVals = new Set()
-        for (let val of c) {
-          const moddedVal = i(val)
-          if (!modifiedVals.has(moddedVal)) {
-            modifiedVals.add(moddedVal)
-            uniqVals.add(val)
-          }
-        }
-        return Array.from(uniqVals)
-      }
-    },
-
-    keys: function(obj) {
-      const keys = []
-      for (let key in obj){
-        keys.push(key)
-      }
-      return keys
-    },
-
-    values: function(obj) {
-      const values = []
-      for (let key in obj){
-        values.push(obj[key])
-      }
-      return values
-
+    functions: function() {
 
     },
 
-    functions: function(obj) {
-      const functionNames = []
-
-      for (let key in obj) {
-        if (typeof obj[key] === "function"){
-          functionNames.push(key)
-        }
-      }
-
-      return functionNames.sort()
-    },
 
   }
 })()
